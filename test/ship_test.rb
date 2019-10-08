@@ -17,7 +17,7 @@ class ShipTest < Minitest::Test
   end
 
   def test_it_can_have_a_differnt_name
-    some_ship = Ship.new("the kills")
+    some_ship = Ship.new("the kills", 3)
     assert_equal "the kills", some_ship.name
   end
 
@@ -39,10 +39,11 @@ class ShipTest < Minitest::Test
     assert_equal 2, @cruiser.health
   end
 
-  def test_3_hits_sinks_cruiser
+  def test_ship_sinks_after_hits_equals_length
     @cruiser.hit
     assert_equal false, @cruiser.sunk?
     @cruiser.hit
+    assert_equal false, @cruiser.sunk?
     @cruiser.hit
     assert_equal true, @cruiser.sunk?
   end
