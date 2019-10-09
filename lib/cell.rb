@@ -6,6 +6,7 @@ class Cell
     @coordinate = coordinate
     @ship = ship
     @unoccupied = true
+    @fired_at = false
   end
 
   def empty?
@@ -18,22 +19,33 @@ class Cell
   end
 
   def fired_upon?
-    return @ship.health < @ship.length
-    false
+    # if empty?
+    # return @ship.health < @ship.length ||
+    @fired_at
   end
 
   def fire_upon
     #R1 = possible refactor to a boolean expression
     if empty? == false
-      @ship.health -= 1
+      @ship.hit
+      @fired_at = true
+    else
+      @fired_at = true
     end
   end
 
-  def render
-    if empty?
+  def render(show = false)
+    # possible refactor :)
+    if fired_upon? == false && show == false
       "."
-    elsif empty? && !(fire_upon)
+    elsif empty? == true && fired_upon? == true
       "M"
+    elsif show == true && empty? == false
+      "S"
+    elsif fired_upon? == true && empty? == false && @ship.sunk? == false
+      "H"
+    elsif @ship.sunk? == true
+      "X"
     end
   end
 end
