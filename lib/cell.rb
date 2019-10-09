@@ -1,3 +1,5 @@
+require 'pry'
+
 class Cell
   attr_reader :coordinate, :ship, :unoccupied
   def initialize(coordinate)
@@ -21,6 +23,17 @@ class Cell
   end
 
   def fire_upon
-    @ship.health -= 1
+    #R1 = possible refactor to a boolean expression
+    if empty? == false
+      @ship.health -= 1
+    end
+  end
+
+  def render
+    if empty?
+      "."
+    elsif empty? && !(fire_upon)
+      "M"
+    end
   end
 end
