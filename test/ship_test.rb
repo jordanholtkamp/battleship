@@ -1,6 +1,8 @@
-require './lib/ship'
+require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
+require './lib/ship'
+
 
 class ShipTest < Minitest::Test
 
@@ -30,16 +32,13 @@ class ShipTest < Minitest::Test
     #assert_equal 2, @sub.health
   end
 
-  def test_initially_sunk?
-    assert_equal false, @cruiser.sunk?
-  end
-
   def test_hit_decreases_health_by_1
     @cruiser.hit
     assert_equal 2, @cruiser.health
   end
 
-  def test_ship_sinks_after_hits_equals_length
+  def test_cruiser_sinks_after_3_hits
+    assert_equal false, @cruiser.sunk?
     @cruiser.hit
     assert_equal false, @cruiser.sunk?
     @cruiser.hit
