@@ -2,6 +2,7 @@ require 'pry'
 
 class Cell
   attr_reader :coordinate, :ship, :unoccupied
+
   def initialize(coordinate)
     @coordinate = coordinate
     @ship = ship
@@ -19,8 +20,6 @@ class Cell
   end
 
   def fired_upon?
-    # if empty?
-    # return @ship.health < @ship.length ||
     @fired_at
   end
 
