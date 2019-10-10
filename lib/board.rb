@@ -32,15 +32,41 @@ class Board
 
   def valid_placement?(ship, cells_placed_array)
     ship.length == cells_placed_array.length
-    # split_cons = cells_placed_array.split(//, 2)
-    something = cells_placed_array.map do |cell|
+
+    #take our array and split to an array or arrays
+    coordinates_split = cells_placed_array.map do |cell|
       cell.split(//, 2)
     end
-    sorted_array = something.map do |element|
-      binding.pry
-      element[][0]
+
+    #take array of arrays and move to just an array of alpha
+    filter_alpha_array = []
+    coordinates_split.each do |inner_array|
+      filter_alpha_array << inner_array.first.ord
     end
-    binding.pry
+
+    #take array of arrays and move to just an array of numbers
+    filter_numeric_array = []
+    coordinates_split.each do |inner_array|
+      filter_numeric_array << inner_array.last.to_i
+    end
+
+    # now we have filter_alpha_array and filter_numeric_array
+    #each cons
+    #four booleans = check names
+    cons_num_test = filter_numeric_array.each_cons(2).all? { |a,b| b == a + 1 }
+    cons_alpha_test = filter_alpha_array.each_cons(2).all? { |a,b| b == a + 1 }
+    same_num_test = filter_numeric_array.each_cons(2).all? { |a,b| b == a}
+    same_alpha_test = filter_alpha_array.each_cons(2).all? { |a,b| b == a}
+
+    if same_alpha_test && cons_num_test && ship.length == cells_placed_array.length
+      true
+    elsif cons_alpha_test && same_num_test && ship.length == cells_placed_array.length
+      true
+    else
+      false
+    end
+
+
 
   end
 end
