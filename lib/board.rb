@@ -24,4 +24,23 @@ class Board
       "D4": Cell.new("D4")
   }
   end
+
+  def valid_coordinate?(cell)
+    split_cell = cell.split(//, 2)
+    ("A".."D") === split_cell[0] && (1..4) === split_cell[1].to_i
+  end
+
+  def valid_placement?(ship, cells_placed_array)
+    ship.length == cells_placed_array.length
+    # split_cons = cells_placed_array.split(//, 2)
+    something = cells_placed_array.map do |cell|
+      cell.split(//, 2)
+    end
+    sorted_array = something.map do |element|
+      binding.pry
+      element[][0]
+    end
+    binding.pry
+
+  end
 end
