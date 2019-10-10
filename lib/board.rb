@@ -3,7 +3,6 @@ require 'pry'
 class Board
   attr_reader :cells
   def initialize
-
     @cells =
     {
       "A1": Cell.new("A1"),
@@ -29,6 +28,24 @@ class Board
     @cells.keys.include?(cell.to_sym)
   end
 
+  # def coordinate_split(cells_placed_array)
+  #   cells_placed_array.map do |cell|
+  #     cell.split(//, 2)
+  #   end
+  # end
+  #
+  # def convert_to_alpha_array
+  #   alpha_array = coordinate_split.map do |cell|
+  #     inner_array.first.ord
+  #   end
+  # end
+  #
+  # def convert_to_num_array
+  #   num_array = coordinate_split.map do |cell|
+  #     inner_array.last.to_i
+  #   end
+  # end
+
   def valid_placement?(ship, cells_placed_array)
     valid_length = ship.length == cells_placed_array.length
     #take our array and split to an array or arrays
@@ -41,6 +58,7 @@ class Board
     coordinates_split.each do |inner_array|
       filter_alpha_array << inner_array.first.ord
     end
+
 
     #take array of arrays and move to just an array of numbers
     filter_numeric_array = []
