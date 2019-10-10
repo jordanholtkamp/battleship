@@ -26,13 +26,11 @@ class Board
   end
 
   def valid_coordinate?(cell)
-    split_cell = cell.split(//, 2)
-    ("A".."D") === split_cell[0] && (1..4) === split_cell[1].to_i
+    @cells.keys.include?(cell.to_sym)
   end
 
   def valid_placement?(ship, cells_placed_array)
-    ship.length == cells_placed_array.length
-
+    valid_length = ship.length == cells_placed_array.length
     #take our array and split to an array or arrays
     coordinates_split = cells_placed_array.map do |cell|
       cell.split(//, 2)
@@ -55,18 +53,16 @@ class Board
     #four booleans = check names
     cons_num_test = filter_numeric_array.each_cons(2).all? { |a,b| b == a + 1 }
     cons_alpha_test = filter_alpha_array.each_cons(2).all? { |a,b| b == a + 1 }
-    same_num_test = filter_numeric_array.each_cons(2).all? { |a,b| b == a}
-    same_alpha_test = filter_alpha_array.each_cons(2).all? { |a,b| b == a}
+    same_num_test = filter_numeric_array.each_cons(2).all? { |a,b| b == a }
+    same_alpha_test = filter_alpha_array.each_cons(2).all? { |a,b| b == a }
 
-    if same_alpha_test && cons_num_test && ship.length == cells_placed_array.length
+
+    if same_alpha_test && cons_num_test && valid_length
       true
-    elsif cons_alpha_test && same_num_test && ship.length == cells_placed_array.length
+    elsif cons_alpha_test && same_num_test && valid_length
       true
     else
       false
     end
-
-
-
   end
 end
