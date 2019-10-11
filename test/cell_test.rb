@@ -20,7 +20,7 @@ class CellTest < Minitest::Test
   end
 
   def test_ship_returns_nil
-    assert_equal nil, @cell_1.ship
+    assert_nil @cell_1.ship
   end
 
   def test_cell_is_initially_empty

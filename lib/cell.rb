@@ -6,17 +6,15 @@ class Cell
   def initialize(coordinate)
     @coordinate = coordinate
     @ship = ship
-    @unoccupied = true
     @fired_at = false
   end
 
   def empty?
-    @unoccupied
+    @ship == nil
   end
 
   def place_ship(ship_obj)
     @ship = ship_obj
-    @unoccupied = false
   end
 
   def fired_upon?
@@ -24,7 +22,6 @@ class Cell
   end
 
   def fire_upon
-    #R1 = possible refactor to a boolean expression
     if empty? == false
       @ship.hit
       @fired_at = true
@@ -34,16 +31,15 @@ class Cell
   end
 
   def render(show = false)
-    # possible refactor :)
-    if fired_upon? == false && show == false
+    if !fired_upon? && show == false
       "."
-    elsif empty? == true && fired_upon? == true
+    elsif empty? && fired_upon?
       "M"
-    elsif show == true && empty? == false
+    elsif show == true && !empty?
       "S"
-    elsif fired_upon? == true && empty? == false && @ship.sunk? == false
+    elsif fired_upon? && !empty? && !@ship.sunk?
       "H"
-    elsif @ship.sunk? == true
+    elsif @ship.sunk?
       "X"
     end
   end
