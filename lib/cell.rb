@@ -5,12 +5,18 @@ class Cell
 
   def initialize(coordinate)
     @coordinate = coordinate
-    @ship = ship
+    @ship = nil
     @fired_at = false
+
+    # @show = false
   end
 
   def empty?
-    @ship == nil
+    if @ship == nil
+      true
+    else
+      false
+    end
   end
 
   def place_ship(ship_obj)
@@ -30,16 +36,18 @@ class Cell
     end
   end
 
-  def render(show = false)
-    if !fired_upon? && show == false
+  def render (show = false)
+    # binding.pry
+
+    if empty? || show == false && !empty?
       "."
+    elsif !empty? && show == true
+      "S"
     elsif empty? && fired_upon?
       "M"
-    elsif show == true && !empty?
-      "S"
-    elsif fired_upon? && !empty? && !@ship.sunk?
+    elsif @ship == !(nil) && fired_upon? && !@ship.sunk?
       "H"
-    elsif @ship.sunk?
+    elsif @ship == !(nil) && @ship.sunk?
       "X"
     end
   end
