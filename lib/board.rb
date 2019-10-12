@@ -68,8 +68,18 @@ class Board
     end
   end
 
-
   def place(ship, coordinates_array)
-
+    #### need to edit this ****  #####
+    if valid_placement?(ship, coordinates_array)
+      coordinates_array.each do |individual_coordinate|
+        # if individual_coordinate.valid_coordinate?
+        @cells[individual_coordinate].place_ship(ship)
+      end
+        # end
+    else
+      p "cannot place ship"
+    end
   end
+
+  def render 
 end
