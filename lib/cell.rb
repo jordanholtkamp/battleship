@@ -1,14 +1,12 @@
 require 'pry'
 
 class Cell
-  attr_reader :coordinate, :ship, :unoccupied
+  attr_reader :coordinate, :ship
 
   def initialize(coordinate)
     @coordinate = coordinate
     @ship = nil
     @fired_at = false
-
-    # @show = false
   end
 
   def empty?
@@ -37,17 +35,15 @@ class Cell
   end
 
   def render (show = false)
-    # binding.pry
-
-    if empty? || show == false && !empty?
+    if empty? && !fired_upon? || show == false && !empty? && !fired_upon?
       "."
-    elsif !empty? && show == true
+    elsif !empty? && show == true && !fired_upon?
       "S"
     elsif empty? && fired_upon?
       "M"
-    elsif @ship == !(nil) && fired_upon? && !@ship.sunk?
+    elsif !empty? && fired_upon? && !@ship.sunk?
       "H"
-    elsif @ship == !(nil) && @ship.sunk?
+    elsif !empty? && @ship.sunk?
       "X"
     end
   end
