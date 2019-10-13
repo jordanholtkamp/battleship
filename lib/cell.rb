@@ -1,16 +1,20 @@
 require 'pry'
 
 class Cell
-  attr_reader :coordinate, :ship, :unoccupied
+  attr_reader :coordinate, :ship
 
   def initialize(coordinate)
     @coordinate = coordinate
-    @ship = ship
+    @ship = nil
     @fired_at = false
   end
 
   def empty?
-    @ship == nil
+    if @ship == nil
+      true
+    else
+      false
+    end
   end
 
   def place_ship(ship_obj)
@@ -30,16 +34,16 @@ class Cell
     end
   end
 
-  def render(show = false)
-    if !fired_upon? && show == false
+  def render (show = false)
+    if empty? && !fired_upon? || show == false && !empty? && !fired_upon?
       "."
+    elsif !empty? && show == true && !fired_upon?
+      "S"
     elsif empty? && fired_upon?
       "M"
-    elsif show == true && !empty?
-      "S"
-    elsif fired_upon? && !empty? && !@ship.sunk?
+    elsif !empty? && fired_upon? && !@ship.sunk?
       "H"
-    elsif @ship.sunk?
+    elsif !empty? && @ship.sunk?
       "X"
     end
   end
