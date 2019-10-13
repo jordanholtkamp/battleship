@@ -6,9 +6,9 @@ class Computer
   end
 
   def random_computer_placement(ship)
-    computer_coord = ["A0", "A0", "A0"]
+    computer_coord = []
     until @board.valid_placement?(ship, computer_coord) == true do
-       computer_coord = (@board.cells.keys.sample(3))
+       computer_coord = (@board.cells.keys.sample(ship.length))
     end
     computer_coord
     # compu_rand = ""
