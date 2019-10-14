@@ -26,11 +26,9 @@ class Cell
   end
 
   def fire_upon
+    @fired_at = true
     if empty? == false
       @ship.hit
-      @fired_at = true
-    else
-      @fired_at = true
     end
   end
 
