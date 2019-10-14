@@ -103,7 +103,9 @@ class BoardTest < Minitest::Test
   end
 
   def test_no_ships_placed
-    skip
-    assert_equal false, @board.ship_placed?
+    assert_equal false, @board.ship_placed?(["A1", "A2", "A3"])
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    assert_equal true, @board.ship_placed?(["A1", "A2", "A3"])
+    assert_equal true, @board.ship_placed?(["A1", "B1", "C1"])
   end
 end

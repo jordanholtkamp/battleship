@@ -29,8 +29,6 @@ class Board
     @cells.keys.include?(cell)
   end
 
-  #check if there is a ship there already
-
   def split_coordinates(cells_array)
     cells_array.map do |cell|
       cell.split(//, 2)
@@ -49,12 +47,8 @@ class Board
     end
   end
 
-  # def ship_placed?()
-  #
-  # end
-
   def valid_placement?(ship, cells_placed_array)
-    # return false if coordinate is not valid 
+    # return false if coordinate is not valid
     valid_length = ship.length == cells_placed_array.length
     coordinates_split = split_coordinates(cells_placed_array)
     alpha_array = filter_alpha_array(coordinates_split)
@@ -75,14 +69,22 @@ class Board
     end
   end
 
+  def ship_placed?(coordinates)
+    occupado = false
+    coordinates.each do |coord|
+      if @cells[coord].empty? == false
+        occupado = true
+      end
+    end
+    occupado
+  end
+
   def place(ship, coordinates_array)
-    #### need to edit this to check for ship_placed ****  #####
-    if valid_placement?(ship, coordinates_array)
+    if valid_placement?(ship, coordinates_array) && ship_placed?(coordinates_array) == false
       coordinates_array.each do |individual_coordinate|
         # if individual_coordinate.valid_coordinate?
         @cells[individual_coordinate].place_ship(ship)
       end
-        # end
     else
       p "cannot place ship"
     end
