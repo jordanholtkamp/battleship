@@ -1,3 +1,6 @@
+require './lib/computer'
+require './lib/board'
+require './lib/ship'
 class Round
 
   def initialize
@@ -37,8 +40,6 @@ class Round
     #place computer ship
     @board.place(@computer_sub, computer_coords_sub)
     @board.place(@computer_cruiser, computer_coords_sub)
-
-    
-    #place player ships
+#place player ships
   end
 end
