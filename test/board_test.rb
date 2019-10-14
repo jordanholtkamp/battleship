@@ -11,9 +11,6 @@ class BoardTest < Minitest::Test
     @board = Board.new
     @cruiser = Ship.new("Cruiser", 3)
     @submarine = Ship.new("Submarine", 2)
-    @cell1 = @board.cells["A1"]
-    @cell2 = @board.cells["A2"]
-    @cell3 = @board.cells["A3"]
   end
 
   def test_it_exists
