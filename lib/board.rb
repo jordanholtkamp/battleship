@@ -49,8 +49,12 @@ class Board
     end
   end
 
-  def valid_placement?(ship, cells_placed_array)
+  # def ship_placed?()
+  #
+  # end
 
+  def valid_placement?(ship, cells_placed_array)
+    # return false if coordinate is not valid 
     valid_length = ship.length == cells_placed_array.length
     coordinates_split = split_coordinates(cells_placed_array)
     alpha_array = filter_alpha_array(coordinates_split)
@@ -62,17 +66,13 @@ class Board
     same_alpha_test = alpha_array.each_cons(2).all? { |a,b| b == a }
 
 
-    if same_alpha_test && cons_num_test && valid_length 
+    if same_alpha_test && cons_num_test && valid_length
       true
     elsif cons_alpha_test && same_num_test && valid_length
       true
     else
       false
     end
-  end
-
-  def ship_placed?
-    #needs to return true if there is a ship placed there already - and then not let another ship be placed there if true?
   end
 
   def place(ship, coordinates_array)

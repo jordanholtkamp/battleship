@@ -94,8 +94,16 @@ class BoardTest < Minitest::Test
   end
 
   def test_split_coordinates
+    assert_equal [["A", "1"], ["A", "2"], ["A", "3"]], @board.split_coordinates(["A1", "A2", "A3"])
   end
 
   def test_filter_arrays
+    assert_equal [65, 65, 65], @board.filter_alpha_array(@board.split_coordinates(["A1", "A2", "A3"]))
+    assert_equal [1, 2, 3], @board.filter_numeric_array(@board.split_coordinates(["A1", "A2", "A3"]))
+  end
+
+  def test_no_ships_placed
+    skip
+    assert_equal false, @board.ship_placed?
   end
 end
