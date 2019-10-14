@@ -27,7 +27,6 @@ class Round
   end
 
   def setup_game
-    #place computer ships
     @board = Board.new
     @computer = Computer.new(@board)
     @computer_cruiser = Ship.new("Cruiser", 3)
@@ -39,8 +38,6 @@ class Round
 
     #place computer ship
     @board.place(@computer_sub, computer_coords_sub)
-
-
     @board.place(@computer_cruiser, computer_coords_cruiser)
 
 
