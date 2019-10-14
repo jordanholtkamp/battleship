@@ -29,6 +29,8 @@ class Board
     @cells.keys.include?(cell)
   end
 
+  #check if there is a ship there already
+
   def split_coordinates(cells_array)
     cells_array.map do |cell|
       cell.split(//, 2)
@@ -60,7 +62,7 @@ class Board
     same_alpha_test = alpha_array.each_cons(2).all? { |a,b| b == a }
 
 
-    if same_alpha_test && cons_num_test && valid_length
+    if same_alpha_test && cons_num_test && valid_length 
       true
     elsif cons_alpha_test && same_num_test && valid_length
       true
@@ -69,8 +71,12 @@ class Board
     end
   end
 
+  def ship_placed?
+    #needs to return true if there is a ship placed there already - and then not let another ship be placed there if true?
+  end
+
   def place(ship, coordinates_array)
-    #### need to edit this ****  #####
+    #### need to edit this to check for ship_placed ****  #####
     if valid_placement?(ship, coordinates_array)
       coordinates_array.each do |individual_coordinate|
         # if individual_coordinate.valid_coordinate?

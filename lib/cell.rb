@@ -26,6 +26,7 @@ class Cell
   end
 
   def fire_upon
+    #refactor - repeating code
     if empty? == false
       @ship.hit
       @fired_at = true

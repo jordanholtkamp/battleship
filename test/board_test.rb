@@ -92,4 +92,10 @@ class BoardTest < Minitest::Test
     cell_3.fire_upon
     assert_equal "  1 2 3 4 \nA X X X M \nB . . . . \nC . . . . \nD . . . . \n", board.render_board(true)
   end
+
+  def test_split_coordinates
+  end
+
+  def test_filter_arrays
+  end
 end
