@@ -2,6 +2,7 @@ require './lib/computer'
 require './lib/player'
 require './lib/board'
 require './lib/ship'
+require './lib/turn'
 class Round
 
   def initialize
@@ -94,8 +95,18 @@ class Round
     check_user_coord(user_ship_answer) && @player_board.valid_placement?(ship_obj, user_ship_answer)
   end
 
+  def take_turn
+    turn = Turn.new(@player_board, @computer_board)
+    turn.display_boards
+    turn.receive_user_fire_coord
+    turn.display_boards
+    turn.computer_shot
+    turn.display_boards
+  end
+
   def start_game
     setup_computer_placement
     setup_user_placement
+    take_turn
   end
 end
