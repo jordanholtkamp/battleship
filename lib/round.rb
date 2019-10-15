@@ -40,7 +40,6 @@ class Round
   end
 
   def setup_computer_placement
-    #find rand_computer coordinates
     computer_coords_sub = @computer.random_computer_placement(@computer_sub)
     @computer_board.place(@computer_sub, computer_coords_sub)
 
@@ -81,7 +80,7 @@ class Round
 
     puts "Enter the squares for the Sub (2 spaces):"
     user_sub_answer = gets.chomp.split
-    until validate_user_input(@player_sub, user_sub_answer)
+    until validate_user_input(@player_sub, user_sub_answer) && (@player_board.ship_placed?(user_sub_answer) == false)
       puts "Please enter a valid coordinate in this format: A1 A2 within board dimensions"
       puts "Enter the squares for the Sub (2 spaces):"
       user_sub_answer = gets.chomp.split

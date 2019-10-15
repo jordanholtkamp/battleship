@@ -2,6 +2,7 @@ require './lib/cell'
 require 'pry'
 
 class Board
+
   attr_reader :cells
   def initialize
     @cells =
@@ -80,7 +81,7 @@ class Board
   end
 
   def place(ship, coordinates_array)
-    if valid_placement?(ship, coordinates_array) 
+    if valid_placement?(ship, coordinates_array)
       coordinates_array.each do |individual_coordinate|
         @cells[individual_coordinate].place_ship(ship)
       end
