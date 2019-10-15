@@ -118,17 +118,22 @@ class Round
     booleans_array.all?(true)
   end
 
-  def stop_the_game
-    p "its over peeps"
+  def stop_the_game(winner)
+    p "#{winner} won."
   end
 
   def start_game
     setup_computer_placement
     setup_user_placement
 
-  until game_over?(@player_board) || game_over?(@computer_board)
-    take_turn
-  end
-    stop_the_game
+    until game_over?(@player_board) || game_over?(@computer_board)
+      take_turn
+    end
+
+    if game_over?(@player_board)
+      stop_the_game("I")
+    elsif game_over?(@computer_board)
+      stop_the_game("You")
+    end
   end
 end
