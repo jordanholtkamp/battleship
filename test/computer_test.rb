@@ -8,12 +8,12 @@ require './lib/ship'
 class ComputerTest < Minitest::Test
 
   def setup
-
     @board = Board.new
     @computer = Computer.new(@board)
     @computer_cruiser = Ship.new("Cruiser", 3)
     @computer_sub = Ship.new("Submarine", 2)
   end
+  
   def test_it_exists
     assert_instance_of Computer, @computer
   end
