@@ -1,7 +1,11 @@
 class Turn
+
   def initialize(player_board, computer_board)
     @player_board = player_board
     @computer_board = computer_board
+    @computer_last_fire = ""
+    @player_last_fire = ""
+
   end
 
   def display_boards
@@ -11,7 +15,7 @@ class Turn
     puts @player_board.render_board(true)
   end
 
-  def receive_user_fire_coord
+  def user_shot
     puts "Enter the coordinate for your shot: "
     user_cell_fire = gets.chomp
     until @computer_board.valid_coordinate?(user_cell_fire) && @computer_board.cells[user_cell_fire].fired_upon? == false
@@ -20,6 +24,7 @@ class Turn
     end
 
     @computer_board.cells[user_cell_fire].fire_upon
+    @player_last_fire = user_cell_fire
   end
 
   def computer_shot
@@ -31,6 +36,23 @@ class Turn
     end
 
     @player_board.cells[computer_fire_string].fire_upon
+    @computer_last_fire = computer_fire_string
+  end
+
+  def tell_hit_miss_sunk(board, last_coord_fired)
+    if board.cells[last_coord_fired].render == "M"
+      string = "a miss"
+    elsif board.cells[last_coord_fired].render == "H"
+      string = "a hit"
+    elsif board.cells[last_coord_fired].render == "X"
+      string = "a hit and sunk the ship"
+    end
+    string
+  end
+
+  def display_results
+    puts "Your shot on #{@player_last_fire} was #{tell_hit_miss_sunk(@computer_board, @player_last_fire)}."
+    puts "My shot on #{@computer_last_fire} was #{tell_hit_miss_sunk(@player_board, @computer_last_fire)}."
   end
 
 end

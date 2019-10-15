@@ -98,15 +98,37 @@ class Round
   def take_turn
     turn = Turn.new(@player_board, @computer_board)
     turn.display_boards
-    turn.receive_user_fire_coord
+    turn.user_shot
     turn.display_boards
     turn.computer_shot
     turn.display_boards
+    turn.display_results
+
+    # turns << turn
+  end
+
+  def game_over?(board)
+    cells_with_ships = board.cells.values.find_all do |cell|
+        cell.ship != nil
+      end
+
+    booleans_array = cells_with_ships.map do |cell|
+      cell.ship.sunk?
+    end
+    booleans_array.all?(true)
+  end
+
+  def stop_the_game
+    p "its over peeps"
   end
 
   def start_game
     setup_computer_placement
     setup_user_placement
+
+  until game_over?(@player_board) || game_over?(@computer_board)
     take_turn
+  end
+    stop_the_game
   end
 end
