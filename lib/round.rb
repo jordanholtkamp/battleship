@@ -4,6 +4,15 @@ require './lib/ship'
 class Round
 
   def initialize
+    @board = Board.new
+    @computer = Computer.new(@board)
+
+    @computer_cruiser = Ship.new("Cruiser", 3)
+    @computer_sub = Ship.new("Submarine", 2)
+
+    @player_cruiser = Ship.new("Cruiser", 3)
+    @player_sub = Ship.new("Submarine", 2)
+
     start_menu_message
   end
 
@@ -17,30 +26,45 @@ class Round
       user_menu_select = gets.chomp
 
       if user_menu_select.downcase == "p"
-        #create board
-        setup_game
+        start_game
       elsif user_menu_select.downcase == "q"
+        p "Sorry - you are missing out.  Dummy :)"
       else
         puts "Plese select only P or Q"
         start_menu_message
       end
   end
 
-  def setup_game
-    @board = Board.new
-    @computer = Computer.new(@board)
-    @computer_cruiser = Ship.new("Cruiser", 3)
-    @computer_sub = Ship.new("Submarine", 2)
-
+  def setup_computer_placement
     #find rand_computer coordinates
+     binding.pry
     computer_coords_sub = @computer.random_computer_placement(@computer_sub)
-    computer_coords_cruiser = @computer.random_computer_placement(@computer_cruiser)
-
-    #place computer ship
     @board.place(@computer_sub, computer_coords_sub)
+
+    computer_coords_cruiser = @computer.random_computer_placement(@computer_cruiser)
     @board.place(@computer_cruiser, computer_coords_cruiser)
+  end
 
+  def setup_user_placement
+    p "I have laid out my ships on the grid."
+    p "You now need to lay out your two ships."
+    p "The Cruiser is #{@computer_cruiser.length} units long"
+    p "and the Submarine is #{@computer_sub.length} units long."
 
-    #place player ships
+    puts @board.render_board
+
+    puts "Enter the squares for the Cruiser (3 spaces):"
+    user_cruiser = gets.chomp.split
+
+    until @board.valid_coordinate?(user_cruiser) && @board.valid_placement?(@player_cruiser, user_cruiser)  do
+      puts "Please enter a valid coordinate in this format: A1 A2 A3 within board dimensions"
+      puts "Enter the squares for the Cruiser (3 spaces):"
+      user_cruiser = gets.chomp.split
+    end
+  end
+
+  def start_game
+    setup_computer_placement
+    setup_user_placement
   end
 end
