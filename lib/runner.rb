@@ -28,7 +28,6 @@ end
 
 until @round.game_over?(@player_board) || @round.game_over?(@computer_board)
     @round.take_turn
-    sleep(3)
   end
 
 if @round.game_over?(@player_board)
@@ -36,4 +35,3 @@ if @round.game_over?(@player_board)
 elsif @round.game_over?(@computer_board)
   @round.stop_the_game("You")
 end
-
