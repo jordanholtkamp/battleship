@@ -27,12 +27,6 @@ class Round
       end
   end
 
-  def start_game
-    until game_over?(@player_board) || game_over?(@computer_board)
-      take_turn
-    end
-  end
-
   def take_turn
     turn = Turn.new(@player_board, @computer_board)
     turn.display_boards

@@ -27,7 +27,12 @@ end
 
 @round.setup_computer_placement
 @round.setup_user_placement
-@round.start_game
+
+### main game loop
+until @round.game_over?(@player_board) || @round.game_over?(@computer_board)
+    @round.take_turn
+    sleep(3)
+  end
 
 if @round.game_over?(@player_board)
   @round.stop_the_game("I")
