@@ -108,4 +108,9 @@ class BoardTest < Minitest::Test
     assert_equal true, @board.ship_placed?(["A1", "A2", "A3"])
     assert_equal true, @board.ship_placed?(["A1", "B1", "C1"])
   end
+
+  def test_valid_length
+    assert_equal true, @board.valid_length?(@cruiser, ["A1", "A2", "A3"])
+    assert_equal false, @board.valid_length?(@cruiser, ["A1", "A2"])
+  end
 end
