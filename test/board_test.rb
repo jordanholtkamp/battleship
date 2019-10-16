@@ -108,4 +108,29 @@ class BoardTest < Minitest::Test
     assert_equal true, @board.ship_placed?(["A1", "A2", "A3"])
     assert_equal true, @board.ship_placed?(["A1", "B1", "C1"])
   end
+
+  def test_valid_length
+    assert_equal true, @board.valid_length?(@cruiser, ["A1", "A2", "A3"])
+    assert_equal false, @board.valid_length?(@cruiser, ["A1", "A2"])
+  end
+
+  def test_consecutive_numbers_helper
+    assert_equal true, @board.consecutive_numbers?([["A", "1"], ["A", "2"], ["A", "3"]])
+    assert_equal false, @board.consecutive_numbers?([["A", "1"], ["A", "2"], ["A", "4"]])
+  end
+
+  def test_consecutive_alphas
+    assert_equal false, @board.consecutive_alphas?([["A", "1"], ["A", "2"], ["A", "3"]])
+    assert_equal true, @board.consecutive_alphas?([["A", "1"], ["B", "1"], ["C", "1"]])
+  end
+
+  def test_same_numbers
+    assert_equal true, @board.same_numbers?([["A", "1"], ["B", "1"], ["C", "1"]])
+    assert_equal false, @board.same_numbers?([["A", "1"], ["B", "1"], ["C", "2"]])
+  end
+
+  def test_same_alphas
+    assert_equal true, @board.same_alphas?([["D", "1"], ["D", "2"], ["D", "3"]])
+    assert_equal false, @board.same_alphas?([["C", "1"], ["D", "2"], ["D", "3"]])
+  end
 end
