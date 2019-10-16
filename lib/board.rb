@@ -71,13 +71,10 @@ class Board
   end
 
   def ship_placed?(coordinates)
-    occupado = false
-    coordinates.each do |coord|
-      if @cells[coord].empty? == false
-        occupado = true
-      end
+    occupado = coordinates.map do |coord|
+      @cells[coord].empty?
     end
-    occupado
+    occupado.any?(false)
   end
 
   def place(ship, coordinates_array)
