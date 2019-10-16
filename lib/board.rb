@@ -88,7 +88,7 @@ class Board
     occupado = coordinates.map do |coord|
       @cells[coord].empty?
     end
-    occupado.any?(false)
+    occupado.include?(false)
   end
 
   def place(ship, coordinates_array)

@@ -1,14 +1,12 @@
 require_relative './board'
 require_relative './round'
 require_relative './computer'
-require_relative './player'
 require_relative './ship'
 
 @computer_board = Board.new
 @player_board = Board.new
 
 @computer = Computer.new(@computer_board)
-@player = Player.new(@player_board)
 
 @computer_cruiser = Ship.new("Cruiser", 3)
 @computer_sub = Ship.new("Submarine", 2)
@@ -28,7 +26,6 @@ end
 @round.setup_computer_placement
 @round.setup_user_placement
 
-### main game loop
 until @round.game_over?(@player_board) || @round.game_over?(@computer_board)
     @round.take_turn
     sleep(3)
@@ -40,12 +37,3 @@ elsif @round.game_over?(@computer_board)
   @round.stop_the_game("You")
 end
 
-
-
-# aksing user to place ships
-
-# comp places ships
-
-# loop do
-#   #each turn will happen
-# end
