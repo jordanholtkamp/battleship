@@ -29,7 +29,6 @@ class ShipTest < Minitest::Test
 
   def test_initial_health
     assert_equal 3, @cruiser.health
-    #assert_equal 2, @sub.health
   end
 
   def test_hit_decreases_health_by_1
