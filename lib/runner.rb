@@ -27,13 +27,12 @@ end
 @round.setup_user_placement
 
 until @round.game_over?(@player_board) || @round.game_over?(@computer_board)
+  puts "\e[H\e[2J"
     @round.take_turn
-    sleep(3)
-  end
+end
 
 if @round.game_over?(@player_board)
   @round.stop_the_game("I")
 elsif @round.game_over?(@computer_board)
   @round.stop_the_game("You")
 end
-

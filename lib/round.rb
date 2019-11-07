@@ -59,6 +59,7 @@ class Round
       puts "Please enter a valid coordinate in this format: A1 A2 A3 within board dimensions"
       puts "Enter the squares for the Cruiser (3 spaces):"
       user_cruiser_answer = gets.chomp.split
+      puts "\e[H\e[2J"
     end
 
     @player_board.place(@player_cruiser, user_cruiser_answer)
